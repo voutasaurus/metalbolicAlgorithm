@@ -21,4 +21,6 @@
 *.jl.mem
 *.ji
 
+*~
+
 .DS_Store
