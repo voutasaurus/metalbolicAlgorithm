@@ -12,9 +12,12 @@ println("Creating Cell")
 type Molecule
 	# data stored in molecule
 	data 
-	# outside (false) or inside (true) of cell
-	location
 end
+
+# Creating buckets for molecules
+inside = Molecule[]
+outside = Molecule[]
+
 
 include("input.jl")
 
@@ -25,10 +28,10 @@ type Gene
 	# tree structure
 	parent
 	# access, modified by proteins
-	access
-	# name of protein it creates
 	protein
 	# length of protein life
+	access
+	# name of protein it creates
 	lifetime
 end
 

@@ -10,12 +10,23 @@
 
 println("Input Importing Begun")
 
-m1 = Molecule(1,false)
-m2 = Molecule(0,false)
-m3 = Molecule(1,false)
-m4 = Molecule(1,false)
-m5 = Molecule(0,false)
-m6 = Molecule(1,false)
+m1 = Molecule(1)
+push! (outside,m1)
+
+m2 = Molecule(0)
+push! (outside,m2)
+
+m3 = Molecule(1)
+push! (outside,m3)
+
+m4 = Molecule(1)
+push! (outside,m4)
+
+m5 = Molecule(0)
+push! (outside,m5)
+
+m6 = Molecule(1)
+push! (outside,m6)
 
 
 println("Input Importing Finished")
