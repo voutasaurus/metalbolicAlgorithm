@@ -2,10 +2,13 @@ println("Initiate Cell")
 
 #main loop, continue until output is reached
 
+
+#end condition flag for main loop
 complete = false
 
 while complete == false
-	println("Go")
+	println("No!")
+	complete = true
 end
 
 
