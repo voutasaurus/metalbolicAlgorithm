@@ -46,6 +46,34 @@ end
 include("genetics.jl")
 
 
+# Using Proteins to do (terrible) things to molecules
+
+function proteinMolecule(molecule,gene,pd) 
+
+	# 1 - Normalised Protein Distribution
+	normPD = ProteinAbundance[]
+	sumPD = 0
+
+	for p in pd 
+		sumPD = sumPD + p.abundance
+	end
+
+	for p in pd 
+		normPA = ProteinAbundance(p.protein, (p.abundance/sumPD))
+		push!(normPD,normPA)
+	end
+
+	# 2 - Distribute 
+
+
+end
+
+proteinMolecule(m1, destroyMolecule, proteinDistribution)
+
+
+
+
+
  
 ###### Main Loop ######
 println("Cell is Alive")

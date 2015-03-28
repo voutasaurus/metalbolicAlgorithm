@@ -28,10 +28,9 @@ destroyMoleculeGene = Gene("root", "destroyMolecule", 0.5, 5.0)
 		println("Running destroyMolecule")
 	end
 
-
 # Finally set list of genes/proteins and their initial abundances
-pa1 = ProteinAbundance("root", 0)
-pa2 = ProteinAbundance("destroyMoleculeGene", 0)
+pa1 = ProteinAbundance("root", 22)
+pa2 = ProteinAbundance("destroyMoleculeGene", 33)
 proteinDistribution = [pa1, pa2]
 
 
