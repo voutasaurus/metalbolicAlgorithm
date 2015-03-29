@@ -92,6 +92,7 @@ processMolecule(m1, proteinDistribution)
 
 println(inside)
 
+#=
 function inTimer(outside)
 
 	repeats = length(outside)
@@ -110,6 +111,23 @@ function inputter()
 end
 
 @spawn inTimer(outside)
+
+=#
+
+function asConsumed(outside)
+	for molecule in outside
+		produce(molecule)
+	end
+end
+
+t = @task asConsumed(outside)
+
+println(consume(t))
+println(consume(t))
+println(consume(t))
+println(consume(t))
+println(consume(t))
+println(consume(t))
 
 #sleep(1)
  
