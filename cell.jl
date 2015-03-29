@@ -112,10 +112,6 @@ function processMolecule(molecule, pd)
 
 end
 
-
-
-
-
 ###### Main Loop ######
 println("Cell is Alive")
 
