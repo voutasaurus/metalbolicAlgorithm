@@ -110,13 +110,13 @@ function randomMolecule()
 	return Molecule(rand())
 end
 
-function fromFactory()
+function fromFactory(design)
 	while true
-		produce(randomMolecule())
+		produce(design())
 	end
 end
 
-t = @task fromFactory()
+t = @task fromFactory(randomMolecule)
 
 println(consume(t))
 println(consume(t))
