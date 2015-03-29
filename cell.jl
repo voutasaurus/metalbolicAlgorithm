@@ -118,7 +118,7 @@ end
 # but the task is actually intelligently swapped out
 # when consume isn't being called
 # You can verify this by looking at the output of the println
-function asConsumed()
+function fromOutside()
 	while true
 		if length(outside) > 0
 			molecule = shift!(outside)
@@ -128,7 +128,7 @@ function asConsumed()
 	end
 end
 
-t = @task asConsumed()
+t = @task fromOutside()
 
 println(consume(t))
 println(consume(t))
