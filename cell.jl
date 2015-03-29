@@ -94,8 +94,7 @@ println(inside)
 
 function inTimer(outside)
 
-	repeats = size(outside)
-
+	repeats = length(outside)
 	inputterTimer(t::Timer) = true
 	t = Timer((x)->inputter())
 	start_timer(t, 0.01, repeats)
@@ -112,7 +111,7 @@ end
 
 @spawn inTimer(outside)
 
-
+#sleep(1)
  
 ###### Main Loop ######
 println("Cell is Alive")
