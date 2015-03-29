@@ -92,28 +92,6 @@ processMolecule(m1, proteinDistribution)
 
 println(inside)
 
-#=
-function inTimer(outside)
-
-	repeats = length(outside)
-	inputterTimer(t::Timer) = true
-	t = Timer((x)->inputter())
-	start_timer(t, 0.01, repeats)
-end
-
-function inputter()
-	if (inputterType == "normal")
-		#Start Process
-		push!(fetch(inside), fetch(outside[end]))
-		pop!(fetch(outside))
-		println(inside)
-	end
-end
-
-@spawn inTimer(outside)
-
-=#
-
 # This spin lock might look inefficient 
 # but the task is actually intelligently swapped out
 # when consume isn't being called
@@ -128,7 +106,17 @@ function fromOutside()
 	end
 end
 
-t = @task fromOutside()
+function randomMolecule()
+	return Molecule(rand())
+end
+
+function fromFactory()
+	while true
+		produce(randomMolecule())
+	end
+end
+
+t = @task fromFactory()
 
 println(consume(t))
 println(consume(t))
