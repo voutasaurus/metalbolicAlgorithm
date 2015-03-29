@@ -8,6 +8,10 @@ srand(0)
 println("Creating Cell")
 
 
+# End Condition
+
+include("output.jl")
+
 # Set Up Input Data Structure to be Called
 # This is to be modified by the user (problem defintions)
 
@@ -42,7 +46,6 @@ include("genetics.jl")
 
 
 # (1) Inputter
-
 # This gets molecules for proteins on demand using a specified function from include.jl
 
 include("input.jl")
@@ -70,9 +73,7 @@ t = @task fromFactory()
 # Using Proteins to do (terrible) things to molecules
 
 function consumer()
-	while true
 		processMolecule(consume(t), proteinDistribution)
-	end
 end
 
 
@@ -111,83 +112,19 @@ function processMolecule(molecule, pd)
 
 end
 
-consumer()
 
-#=
-processMolecule(m1, proteinDistribution)
 
-println(consume(t))
-println(consume(t))
-println(consume(t))
-println("waiting...")
-sleep(2)
-println(consume(t))
-println(consume(t))
-println(consume(t))
 
-println("task swapped out. 2...")
-sleep(1)
-println("1...")
-sleep(1)
-println("0.")
 
-println("Pushing more, task not yet swapped in.")
-push!(outside, Molecule("g"))
-push!(outside, Molecule("h"))
-push!(outside, Molecule("i"))
-
-println("2...")
-sleep(1)
-println("1...")
-sleep(1)
-println("0.")
-
-println("Consuming more, task is swapped in now.")
-println(consume(t))
-println(consume(t))
-println(consume(t))
-
-#println("testing...")
-#println(consume(t))
-
-sleep(1)
-=#
- 
 ###### Main Loop ######
 println("Cell is Alive")
 
 complete = false
 while complete == false
 
-	# NB. This is probably the wrong way to do this because of parallel processes ^.^
-	# Plz to be fixes this?
-
-
-	# (1) Inputter Process 
-	# Adds new input molecules from input data structure in a way defined here
-
-
-	# (2) Modify Protein Amounts Proteins
-	# Modifies the number of proteins in a unified way
-	# Adds based on genetics tree values
-	# Removes based on protein types
-
-	# You will be modifying the proteinDistribution array and the abundance property within the ProteinAbundance tuples inside it
-
-
-	# (3) Pair Proteins and Molecules somehow and run their scripts in parallel somehow!
-
-
-	# (4) Process checking output to see if the entire process is done and can be ended
-
-
-	#=
-		if <condition> = true
-			complete = true
-		end
-	=#
-
-	complete = true
+	# Run it like its hot
+	consumer()
+	complete = checkEndCon()
 
 end
 
