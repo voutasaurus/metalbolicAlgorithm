@@ -90,18 +90,27 @@ processMolecule(m1, proteinDistribution)
 
 # (1) Inputter
 
+println(inside)
 
+function inTimer(outside)
 
-function inputter(inside, outside)
+	repeats = size(outside)
+
+	inputterTimer(t::Timer) = true
+	t = Timer((x)->inputter())
+	start_timer(t, 0.01, repeats)
+end
+
+function inputter()
 	if (inputterType == "normal")
 		#Start Process
-		push!(inside, outside[end])
-		pop!(outside)
+		push!(fetch(inside), fetch(outside[end]))
+		pop!(fetch(outside))
+		println(inside)
 	end
 end
 
-@spawn inputter(inside, outside)
-
+@spawn inTimer(outside)
 
 
  
