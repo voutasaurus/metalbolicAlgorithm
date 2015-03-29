@@ -50,7 +50,7 @@ include("genetics.jl")
 
 # Using Proteins to do (terrible) things to molecules
 
-function proteinMolecule(molecule,gene,pd) 
+function proteinMolecule(molecule,pd) 
 
 	# 1 - Normalised Protein Distribution
 	normPD = ProteinAbundance[]
@@ -85,8 +85,7 @@ function proteinMolecule(molecule,gene,pd)
 
 end
 
-proteinMolecule(m1, destroyMoleculeGene, proteinDistribution)
-
+proteinMolecule(m1, proteinDistribution)
 
 
 
