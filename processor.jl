@@ -1,8 +1,8 @@
 
 function fromInside()
 	while true
-		if length(inside) > 0
-			produce(shift!(inside))
+		if length(pool) > 0
+			produce(shift!(pool))
 		end
 	end
 end
@@ -32,4 +32,4 @@ outside = @task fromFactory(randomMolecule)
 inside = @task fromInside()
 environment = @task fromEnvironment(outside, inside)
 
-processMolecule(consume(t), proteinDistribution)
+processMolecule(consume(environment), proteinDistribution)
