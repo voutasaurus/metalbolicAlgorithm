@@ -24,8 +24,8 @@ root = Gene(nothing, root_protein, 1.0,  0.0)
 
 function dmg_protein(molecule)
 	#println("Running destroyMolecule")
-	#println("wow!")
 	#outputCount = outputCount + 1
+
 	return []
 end
 
