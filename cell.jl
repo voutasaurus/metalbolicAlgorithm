@@ -114,22 +114,54 @@ end
 
 =#
 
-function asConsumed(outside)
-	for molecule in outside
-		produce(molecule)
+# This spin lock might look inefficient 
+# but the task is actually intelligently swapped out
+# when consume isn't being called
+# You can verify this by looking at the output of the println
+function asConsumed()
+	while true
+		if length(outside) > 0
+			molecule = shift!(outside)
+			produce(molecule)
+			println("Still ", length(outside), " more to do...")
+		end
 	end
 end
 
-t = @task asConsumed(outside)
+t = @task asConsumed()
 
 println(consume(t))
 println(consume(t))
 println(consume(t))
+println("waiting...")
+sleep(2)
 println(consume(t))
 println(consume(t))
 println(consume(t))
 
-#sleep(1)
+println("task swapped out. 2...")
+sleep(1)
+println("1...")
+sleep(1)
+println("0.")
+
+println("Pushing more, task not yet swapped in.")
+push!(outside, Molecule("g"))
+push!(outside, Molecule("h"))
+push!(outside, Molecule("i"))
+
+println("2...")
+sleep(1)
+println("1...")
+sleep(1)
+println("0.")
+
+println("Consuming more, task is swapped in now.")
+println(consume(t))
+println(consume(t))
+println(consume(t))
+
+sleep(1)
  
 ###### Main Loop ######
 println("Cell is Alive")

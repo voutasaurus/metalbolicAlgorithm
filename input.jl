@@ -12,23 +12,23 @@ inputterType = "normal"
 
 println("Input Importing Begun")
 
-m1 = Molecule(1)
-push! (outside,m1)
+m1 = Molecule("a")
+push!(outside,m1)
 
-m2 = Molecule(0)
-push! (outside,m2)
+m2 = Molecule("b")
+push!(outside,m2)
 
-m3 = Molecule(1)
-push! (outside,m3)
+m3 = Molecule("c")
+push!(outside,m3)
 
-m4 = Molecule(1)
-push! (outside,m4)
+m4 = Molecule("d")
+push!(outside,m4)
 
-m5 = Molecule(0)
-push! (outside,m5)
+m5 = Molecule("e")
+push!(outside,m5)
 
-m6 = Molecule(1)
-push! (outside,m6)
+m6 = Molecule("f")
+push!(outside,m6)
 
 
 println("Input Importing Finished")
