@@ -8,6 +8,8 @@
 
 ###### Example Input ######
 
+inputterType = "normal"
+
 println("Input Importing Begun")
 
 m1 = Molecule(1)

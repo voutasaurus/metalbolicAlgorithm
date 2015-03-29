@@ -17,8 +17,8 @@ type Molecule
 end
 
 # Creating buckets for molecules
-inside = Molecule[]
 outside = Molecule[]
+inside = Molecule[]
 
 
 include("input.jl")
@@ -86,6 +86,21 @@ function processMolecule(molecule, pd)
 end
 
 processMolecule(m1, proteinDistribution)
+
+
+# (1) Inputter
+
+
+
+function inputter(inside, outside)
+	if (inputterType == "normal")
+		#Start Process
+		push!(inside, outside[end])
+		pop!(outside)
+	end
+end
+
+@spawn inputter(inside, outside)
 
 
 
