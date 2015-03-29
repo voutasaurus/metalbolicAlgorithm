@@ -17,14 +17,14 @@ println("Genetics Importing Begun")
 
 function root_protein(molecule) 
 	#println("Never used this function, baka")
-	return molecule
+	return [molecule]
 end
 
 root = Gene(nothing, root_protein, 1.0,  0.0)
 
 function dmg_protein(molecule)
 	#println("Running destroyMolecule")
-	return molecule
+	return []
 end
 
 destroyMoleculeGene = Gene(root, dmg_protein, 0.5, 5.0)
