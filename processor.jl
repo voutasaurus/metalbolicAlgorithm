@@ -28,7 +28,8 @@ function fromFactory(design)
 	end
 end
 
-t = @task fromFactory(randomMolecule)
-
+outside = @task fromFactory(randomMolecule)
+inside = @task fromInside()
+environment = @task fromEnvironment(outside, inside)
 
 processMolecule(consume(t), proteinDistribution)
