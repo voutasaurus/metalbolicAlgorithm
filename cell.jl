@@ -16,13 +16,6 @@ type Molecule
 	data 
 end
 
-# Creating buckets for molecules
-outside = Molecule[]
-inside = Molecule[]
-
-
-include("input.jl")
-
 # Set Up Genetics Data Structure to be Referenced
 # This is to be modified by the user (problem solution)
 
@@ -48,7 +41,40 @@ end
 include("genetics.jl")
 
 
+# (1) Inputter
+
+# This gets molecules for proteins on demand using a specified function from include.jl
+
+include("input.jl")
+pool = Molecule[]
+
+function fromFactory()
+	while true
+		# Gets from existing molecule pool
+		if length(pool) > 0
+			molecule = shift!(pool)
+			produce(molecule)
+		# If the pool is empty, create something new for the pool
+		else
+			produce(getMolecule())
+		end
+	end
+end
+
+t = @task fromFactory()
+
+# (2) Consumer
+
+# This assigns molecules to proteins based on distribution
+
 # Using Proteins to do (terrible) things to molecules
+
+function consumer()
+	while true
+		processMolecule(consume(t), proteinDistribution)
+	end
+end
+
 
 function processMolecule(molecule, pd) 
 
@@ -85,38 +111,10 @@ function processMolecule(molecule, pd)
 
 end
 
+consumer()
+
+#=
 processMolecule(m1, proteinDistribution)
-
-
-# (1) Inputter
-
-println(inside)
-
-# This spin lock might look inefficient 
-# but the task is actually intelligently swapped out
-# when consume isn't being called
-# You can verify this by looking at the output of the println
-function fromOutside()
-	while true
-		if length(outside) > 0
-			molecule = shift!(outside)
-			produce(molecule)
-			println("Still ", length(outside), " more to do...")
-		end
-	end
-end
-
-function randomMolecule()
-	return Molecule(rand())
-end
-
-function fromFactory(design)
-	while true
-		produce(design())
-	end
-end
-
-t = @task fromFactory(randomMolecule)
 
 println(consume(t))
 println(consume(t))
@@ -153,6 +151,7 @@ println(consume(t))
 #println(consume(t))
 
 sleep(1)
+=#
  
 ###### Main Loop ######
 println("Cell is Alive")
