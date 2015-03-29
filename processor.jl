@@ -1,19 +1,15 @@
 
-function fromInside()
-	while true
-		if length(pool) > 0
-			produce(shift!(pool))
-		end
-	end
-end
-
-function fromEnvironment(outside, inside)
+function fromEnvironment(outside, permeability)
 	while true
 		r = rand()
-		if r < 0.5
+		if r < permeability
 			produce(consume(outside))
 		else
-			produce(consume(inside))
+			if length(pool) > 0
+				produce(shift!(pool))
+			else 
+				produce(consume(outside))
+			end
 		end
 	end
 end
@@ -29,7 +25,8 @@ function fromFactory(design)
 end
 
 outside = @task fromFactory(randomMolecule)
-inside = @task fromInside()
-environment = @task fromEnvironment(outside, inside)
 
-processMolecule(consume(environment), proteinDistribution)
+environment = @task fromEnvironment(outside, 0.5)
+
+mset = processMolecule(consume(environment), proteinDistribution)
+append!(mset, pool)
