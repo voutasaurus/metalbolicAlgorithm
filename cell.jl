@@ -74,18 +74,18 @@ function proteinMolecule(molecule,gene,pd)
 	for p in normPD
 		sumNPD = sumNPD + p.abundance
 		if (sumNPD > handOfGod)
-			assignedProtein = p
+			assignedProtein = p.protein
 			break
 		end
 	end
 
 	# 3 - Run Process
 
-	return (assignedProtein.protein(molecule))
+	return (assignedProtein(molecule))
 
 end
 
-proteinMolecule(m1, destroyMolecule, proteinDistribution)
+proteinMolecule(m1, destroyMoleculeGene, proteinDistribution)
 
 
 

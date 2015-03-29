@@ -15,22 +15,24 @@
 println("Genetics Importing Begun")
 
 
-root = Gene(nothing, noProtein, 1.0,  0.0)
+function root_protein(molecule) 
+	#println("Never used this function, baka")
+	return molecule
+end
 
-	function root.protein() 
-		println("Never used this function, baka")
-	end
+root = Gene(nothing, root_protein, 1.0,  0.0)
 
+function dmg_protein(molecule)
+	#println("Running destroyMolecule")
+	return molecule
+end
 
-destroyMoleculeGene = Gene(root, destroyMolecule, 0.5, 5.0)
+destroyMoleculeGene = Gene(root, dmg_protein, 0.5, 5.0)
 
-	function destroyMoleculeGene.protein()
-		println("Running destroyMolecule")
-	end
 
 # Finally set list of genes/proteins and their initial abundances
-pa1 = ProteinAbundance("root", 22)
-pa2 = ProteinAbundance("destroyMoleculeGene", 33)
+pa1 = ProteinAbundance(root_protein, 22)
+pa2 = ProteinAbundance(dmg_protein, 33)
 proteinDistribution = [pa1, pa2]
 
 
