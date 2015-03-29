@@ -82,8 +82,9 @@ environment = @task fromEnvironment(outside, 0.5)
 # Using Proteins to do (terrible) things to molecules
 
 function consumer()
-	mset = processMolecule(consume(environment), proteinDistribution)
-	append!(pool, mset)
+	result = processMolecule(consume(environment), proteinDistribution)
+	append!(pool, result[1])
+	return (result[2], result[3])
 end
 
 
@@ -126,15 +127,16 @@ end
 println("Cell is Alive")
 
 complete = false
+#outputCount = 0
 while complete == false
 	# Run it like its hot
-	consumer()
-	outputCount = outputCount + 1
+	result = consumer()
+	outputCount = outputCount + result[2]
+	backreg = result[1]
 	complete = checkEndCon()
 end
 
 println(outputCount)
-
 ###### Final Steps ######
 println("Cell is Dead")
 

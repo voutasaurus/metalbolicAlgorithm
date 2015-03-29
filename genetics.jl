@@ -14,10 +14,13 @@
 
 println("Genetics Importing Begun")
 
+include("output.jl")
 
 function root_protein(molecule) 
 	#println("Never used this function, baka")
-	return [molecule]
+	output = 0
+	backreg = 0
+	return ([molecule], backreg, output)
 end
 
 root = Gene(nothing, root_protein, 1.0,  0.0)
@@ -26,16 +29,27 @@ function dmg_protein(molecule)
 	#println("Running destroyMolecule")
 	#println("wow!")
 	#outputCount = outputCount + 1
-	return []
+	output = 1
+	backreg = 0
+	return ([], backreg, output)
 end
 
 destroyMoleculeGene = Gene(root, dmg_protein, 0.5, 5.0)
 
+function duplicate_protein(molecule)
+	output = 0
+	backreg = 0
+	return ([molecule, molecule], backreg, output)
+end
+
+dupMolGene = Gene(root, duplicate_protein, 0.5, 5.0)
+
 
 # Finally set list of genes/proteins and their initial abundances
-pa1 = ProteinAbundance(root, 22)
-pa2 = ProteinAbundance(destroyMoleculeGene, 33)
-proteinDistribution = [pa1, pa2]
+pa1 = ProteinAbundance(root, 10)
+pa2 = ProteinAbundance(destroyMoleculeGene, 20)
+pa3 = ProteinAbundance(dupMolGene, 70)
+proteinDistribution = [pa1, pa2, pa3]
 
 
 println("Genetics Importing Finished")
