@@ -12,6 +12,7 @@
 println("Input Importing Begun")
 
 function getMolecule()
+	println("Processing a Random Molecule")
 	return Molecule(rand())
 end
 

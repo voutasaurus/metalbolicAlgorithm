@@ -64,6 +64,7 @@ function fromEnvironment(outside, permeability)
 			produce(consume(outside))
 		else
 			if length(fetch(pool)) > 0
+				println("Processing Molecule from Pool")
 				produce(shift!(fetch(pool)))
 			else 
 				produce(consume(outside))
@@ -82,6 +83,7 @@ environment = @task fromEnvironment(outside, 0.5)
 # Using Proteins to do (terrible) things to molecules
 
 function consumer()
+	println("Consume a Molecule")
 	result = processMolecule(consume(environment), proteinDistribution)
 	append!(pool, result[1])
 	return (result[2], result[3])
