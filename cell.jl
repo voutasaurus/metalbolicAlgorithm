@@ -2,6 +2,8 @@
 
 # This is the main script, set up input.jl and genetics.jl then run this in Julia.
 
+srand(0)
+
 ###### Initial Set Up ######
 println("Creating Cell")
 
@@ -27,7 +29,7 @@ include("input.jl")
 type Gene
 	# tree structure
 	parent
-	# access, modified by proteins
+	# protein function
 	protein
 	# length of protein life
 	access
@@ -64,12 +66,26 @@ function proteinMolecule(molecule,gene,pd)
 	end
 
 	# 2 - Distribute 
+	handOfGod = rand()
+	sumNPD = 0
+	# Bad Default
+	assignedProtein = root
 
+	for p in normPD
+		sumNPD = sumNPD + p.abundance
+		if (sumNPD > handOfGod)
+			assignedProtein = p
+			break
+		end
+	end
+
+	# 3 - Run Process
+
+	return (assignedProtein.protein(molecule))
 
 end
 
 proteinMolecule(m1, destroyMolecule, proteinDistribution)
-
 
 
 

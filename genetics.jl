@@ -15,16 +15,16 @@
 println("Genetics Importing Begun")
 
 
-root = Gene("", "noProtein", 1.0,  0.0)
+root = Gene(nothing, noProtein, 1.0,  0.0)
 
-	function noProtein() 
+	function root.protein() 
 		println("Never used this function, baka")
 	end
 
 
-destroyMoleculeGene = Gene("root", "destroyMolecule", 0.5, 5.0)
+destroyMoleculeGene = Gene(root, destroyMolecule, 0.5, 5.0)
 
-	function destroyMolecule()
+	function destroyMoleculeGene.protein()
 		println("Running destroyMolecule")
 	end
 
