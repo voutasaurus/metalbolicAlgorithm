@@ -20,6 +20,8 @@ function root_protein(molecule)
 	#println("Never used this function, baka")
 	output = 0
 	backreg = 0
+	println(molecule)
+	println("Replicating Molecule")
 	return ([molecule], backreg, output)
 end
 
@@ -30,6 +32,8 @@ function dmg_protein(molecule)
 	#outputCount = outputCount + 1
 	output = 1
 	backreg = 0
+	println(molecule)
+	println("Destroying Molecule")
 	return ([], backreg, output)
 end
 
@@ -38,6 +42,8 @@ destroyMoleculeGene = Gene(root, dmg_protein, 0.5, 5.0)
 function duplicate_protein(molecule)
 	output = 0
 	backreg = 0
+	println(molecule)
+	println("Double Molecule")
 	return ([molecule, molecule], backreg, output)
 end
 
