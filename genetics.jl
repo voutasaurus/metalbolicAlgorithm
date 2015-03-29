@@ -31,8 +31,8 @@ destroyMoleculeGene = Gene(root, dmg_protein, 0.5, 5.0)
 
 
 # Finally set list of genes/proteins and their initial abundances
-pa1 = ProteinAbundance(root_protein, 22)
-pa2 = ProteinAbundance(dmg_protein, 33)
+pa1 = ProteinAbundance(root, 22)
+pa2 = ProteinAbundance(destroyMoleculeGene, 33)
 proteinDistribution = [pa1, pa2]
 
 

@@ -39,9 +39,9 @@ end
 
 
 type ProteinAbundance 
-	#Protein Type = Gene Type
-	protein
-	# Percentage as a float
+	# Gene for Protein
+	gene
+	# Raw Number (not normalized)
 	abundance
 end
 
@@ -50,7 +50,7 @@ include("genetics.jl")
 
 # Using Proteins to do (terrible) things to molecules
 
-function proteinMolecule(molecule,pd) 
+function processMolecule(molecule, pd) 
 
 	# 1 - Normalised Protein Distribution
 	normPD = ProteinAbundance[]
@@ -61,7 +61,7 @@ function proteinMolecule(molecule,pd)
 	end
 
 	for p in pd 
-		normPA = ProteinAbundance(p.protein, (p.abundance/sumPD))
+		normPA = ProteinAbundance(p.gene, (p.abundance/sumPD))
 		push!(normPD,normPA)
 	end
 
@@ -74,18 +74,18 @@ function proteinMolecule(molecule,pd)
 	for p in normPD
 		sumNPD = sumNPD + p.abundance
 		if (sumNPD > handOfGod)
-			assignedProtein = p.protein
+			assignedProtein = p.gene
 			break
 		end
 	end
 
 	# 3 - Run Process
 
-	return (assignedProtein(molecule))
+	return (assignedProtein.protein(molecule))
 
 end
 
-proteinMolecule(m1, proteinDistribution)
+processMolecule(m1, proteinDistribution)
 
 
 
