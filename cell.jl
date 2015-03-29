@@ -53,18 +53,27 @@ pool = Molecule[]
 
 function fromFactory()
 	while true
-		# Gets from existing molecule pool
-		if length(pool) > 0
-			molecule = shift!(pool)
-			produce(molecule)
-		# If the pool is empty, create something new for the pool
+		produce(getMolecule())
+	end
+end
+
+function fromEnvironment(outside, permeability)
+	while true
+		r = rand()
+		if r < permeability
+			produce(consume(outside))
 		else
-			produce(getMolecule())
+			if length(fetch(pool)) > 0
+				produce(shift!(fetch(pool)))
+			else 
+				produce(consume(outside))
+			end
 		end
 	end
 end
 
-t = @task fromFactory()
+outside = @task fromFactory()
+environment = @task fromEnvironment(outside, 0.5)
 
 # (2) Consumer
 
@@ -73,7 +82,8 @@ t = @task fromFactory()
 # Using Proteins to do (terrible) things to molecules
 
 function consumer()
-		processMolecule(consume(t), proteinDistribution)
+	mset = processMolecule(consume(environment), proteinDistribution)
+	append!(pool, mset)
 end
 
 
@@ -117,12 +127,13 @@ println("Cell is Alive")
 
 complete = false
 while complete == false
-
 	# Run it like its hot
 	consumer()
+	outputCount = outputCount + 1
 	complete = checkEndCon()
-
 end
+
+println(outputCount)
 
 ###### Final Steps ######
 println("Cell is Dead")
