@@ -5,8 +5,8 @@ function fromEnvironment(outside, permeability)
 		if r < permeability
 			produce(consume(outside))
 		else
-			if length(pool) > 0
-				produce(shift!(pool))
+			if length(fetch(pool)) > 0
+				produce(shift!(fetch(pool)))
 			else 
 				produce(consume(outside))
 			end
