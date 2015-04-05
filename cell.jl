@@ -1,27 +1,23 @@
 # cell.jl
 
-# This is the main script, set up input.jl and genetics.jl then run this in Julia.
+# This is the main script, to run this script type: include("cell.jl") into Julia
+# Set up the following scripts to define your problem and solution:
+# (1) genetics.jl -> This is your system, feel free to design or evolve an ideal genetic system
+# (2) input.jl -> This defines the problem you are trying to solve in terms of a flow of data into the cell
+# (3) output.jl -> This defines the conditions by which you monitor success/failure/end conditions for the system
 
+#Set a random seed to ensure consistent results
 srand(0)
 
 ###### Initial Set Up ######
 println("Creating Cell")
 
-
-# End Condition
-
-include("output.jl")
-
-# Set Up Input Data Structure to be Called
-# This is to be modified by the user (problem defintions)
+# Set Up Data Types
 
 type Molecule
 	# data stored in molecule
 	data 
 end
-
-# Set Up Genetics Data Structure to be Referenced
-# This is to be modified by the user (problem solution)
 
 type Gene
 	# tree structure
@@ -42,13 +38,17 @@ type ProteinAbundance
 	abundance
 end
 
+include("output.jl")
+
 include("genetics.jl")
+
+include("input.jl")
+
 
 
 # (1) Inputter
 # This gets molecules for proteins on demand using a specified function from include.jl
 
-include("input.jl")
 pool = Molecule[]
 
 function fromFactory()
@@ -79,15 +79,14 @@ environment = @task fromEnvironment(outside, 0.5)
 # (2) Consumer
 
 # This assigns molecules to proteins based on distribution
-
 # Using Proteins to do (terrible) things to molecules
 
 function consumer()
 	println("Consume a Molecule")
 	result = processMolecule(consume(environment), proteinDistribution)
-	println("")
-	println(pool)
-	println("")
+	#println("")
+	#println(pool)
+	#println("")
 	append!(pool, result[1])
 	return (result[2], result[3])
 end
